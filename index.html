@@ -18,7 +18,8 @@
     <script src="script.js"></script>
     <script>
         let lazyHtml = new LazyHtml('body', {
-            distance: 10,
+            distance: 100,
+            attr: 'lazy',
             lazy: true,
             onLoad: function (e) {
                 console.log('onLoad', e);
