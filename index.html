@@ -13,16 +13,42 @@
     <div class="container" style="--color:red"></div>
     <div class="container" style="--color:green"></div>
     <div class="container" style="--color:yellow"></div>
-    <div class="container" style="--color:blue"></div>
-    <div class="container" lazy style="--color:purple"></div>
+    <div class="container" style="--color:blue">
+        <script type="application/json">
+            {
+                "method": "ajax",
+                "type": "html",
+                "url": "https://www.google.com"
+            }
+        </script>
+    </div>
+    <div class="container" lazy style="--color:purple">
+        <script type="application/json">
+            {
+                "method": "ajax",
+                "target": "div > div.content",
+                "response": {
+                    "method": "get",
+                    "type": "html",
+                    "url": "https://m.yamibuy.com/zh/FAQ/32",
+                    "headers": [],
+                    "body": ""
+                }
+            }
+        </script>
+        <div class="p">
+            <div>这里组件原本的内容</div>
+            <div class="content"></div>
+        </div>
+    </div>
     <script src="script.js"></script>
     <script>
         let lazyHtml = new LazyHtml('body', {
             distance: 100,
             attr: 'lazy',
             lazy: true,
-            onLoad: function (e) {
-                console.log('onLoad', e);
+            onLoad: function () {
+                console.log('onLoad 回调执行', arguments);
             }
         });
         lazyHtml.init();
