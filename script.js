@@ -35,22 +35,27 @@ class LazyHtml {
     };
   }
 
-  // html 元素懒加载，设置lazy属性，入参是距离页面出现的距离
+  // html 元素懒加载，设置lazy属性，如果距离出现在可视区域，则加载图片
   lazyLoad() {
     let lazyElements = this.getLazyElements();
-    let distance = this.options.distance | 0; //获取距离页面出现的距离
-    
-    if(lazyElements.length === 0) return;
 
-    for (let i = 0; i < lazyElements.length; i++) {
-      let element = lazyElements[i];
-      let elementTop = element.getBoundingClientRect().top;
-      if (elementTop < distance) {
-        console.log(elementTop);
-        console.log('元素出现');
+    if (lazyElements.length === 0) return;
+
+    let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    let clientHeight = document.documentElement.clientHeight;
+    lazyElements.forEach((element) => {
+      let offsetTop = element.offsetTop;
+      let offsetHeight = element.offsetHeight;
+     
+      let distance = this.options.distance;
+      if (
+        offsetTop + offsetHeight + distance > scrollTop &&
+        offsetTop < scrollTop + clientHeight
+      ) {
         this.setLazyAttr(element, "loaded");
+        element.src = element.getAttribute("data-src");
       }
-    }
+    })
   }
 
   //获取页面包含lazy属性的元素
