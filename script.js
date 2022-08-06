@@ -1,6 +1,8 @@
 class LazyHtml {
-  constructor(element) {
+  constructor(element, options = { distance: 0 }) {
     this.element = document.querySelector(element);
+
+    this.options = options;
   }
 
   //监听页面滚动
@@ -33,30 +35,22 @@ class LazyHtml {
     };
   }
 
-  // 懒加载
+  // html 元素懒加载，设置lazy属性，入参是距离页面出现的距离
   lazyLoad() {
-    console.log("lazyLoad执行");
-
-    const lazyElements = this.getLazyElements();
-    if (lazyElements.length === 0) {
-      return;
-    }
+    let lazyElements = this.getLazyElements();
+    let distance = this.options.distance | 0; //获取距离页面出现的距离
     
-    lazyElements.forEach((element) => {
-      const offsetTop = element.offsetTop;
-      const offsetHeight = element.offsetHeight;
-      const scrollTop =
-        document.documentElement.scrollTop || document.body.scrollTop;
-      const clientHeight =
-        document.documentElement.clientHeight || document.body.clientHeight;
-      if (
-        offsetTop + offsetHeight >= scrollTop &&
-        offsetTop <= scrollTop + clientHeight
-      ) {
+    if(lazyElements.length === 0) return;
+
+    for (let i = 0; i < lazyElements.length; i++) {
+      let element = lazyElements[i];
+      let elementTop = element.getBoundingClientRect().top;
+      if (elementTop < distance) {
+        console.log(elementTop);
+        console.log('元素出现');
         this.setLazyAttr(element, "loaded");
-        element.src = element.getAttribute("lazy");
       }
-    });
+    }
   }
 
   //获取页面包含lazy属性的元素

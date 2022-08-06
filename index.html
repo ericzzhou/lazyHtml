@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <title>html lazy</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="container" style="--color:red"></div>
     <div class="container" style="--color:green"></div>
@@ -15,9 +17,16 @@
     <div class="container" lazy style="--color:purple"></div>
     <script src="script.js"></script>
     <script>
-        let lazyHtml = new LazyHtml('body');
+        let lazyHtml = new LazyHtml('body', {
+            distance: 10,
+            lazy: true,
+            onLoad: function (e) {
+                console.log('onLoad', e);
+            }
+        });
         lazyHtml.init();
     </script>
 
 </body>
+
 </html>
