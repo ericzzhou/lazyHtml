@@ -12,6 +12,10 @@ body {
     justify-content: center;
     align-items: center;
     background-color: var(--color);
+}
+
+.loading{
+  
     background-image: url(../images/loading.gif);
     background-repeat: no-repeat;
     background-position: center;

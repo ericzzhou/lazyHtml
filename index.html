@@ -10,19 +10,13 @@
 </head>
 
 <body>
-    <div class="container" style="--color:red"></div>
-    <div class="container" style="--color:green"></div>
-    <div class="container" style="--color:yellow"></div>
-    <div class="container" style="--color:blue">
-        <script type="application/json">
-            {
-                "method": "ajax",
-                "type": "html",
-                "url": "https://www.google.com"
-            }
-        </script>
+    <div class="container loading" style="--color:red"></div>
+    <div class="container loading" style="--color:green"></div>
+    <div class="container loading" style="--color:yellow"></div>
+    <div class="container loading" style="--color:blue">
+
     </div>
-    <div class="container" lazy style="--color:purple">
+    <div class="container loading" lazy style="--color:purple">
         <script type="application/json">
             {
                 "method": "ajax",
@@ -30,7 +24,7 @@
                 "response": {
                     "method": "get",
                     "type": "html",
-                    "url": "https://m.yamibuy.com/zh/FAQ/32",
+                    "url": "https://www.yamibuy.com/robots.txt",
                     "headers": [],
                     "body": ""
                 }
@@ -44,10 +38,13 @@
     <script src="script.js"></script>
     <script>
         let lazyHtml = new LazyHtml('body', {
-            distance: 100,
+            distance: 50,
             attr: 'lazy',
             lazy: true,
             onLoad: function () {
+                document.querySelectorAll('[lazy="loaded"]').forEach(function (item) {
+                    item.classList.remove('loading');
+                });
                 console.log('onLoad 回调执行', arguments);
             }
         });
