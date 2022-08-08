@@ -99,19 +99,25 @@ lazyHtml 支持JSON配置，用来配置相关行为。
 - 在元素上添加 lazy 属性，lazyhtml库将会监听设置了lazy属性的元素
 - 在元素容器内部使用JSON配置需要请求的数据，以及远端数据返回后替换的页面元素
 - 设置元素加载完成后的回调事件
-##### axios(config)
 
-```js
-// Send a POST request
-axios({
-  method: 'post',
-  url: '/user/12345',
-  data: {
-    firstName: 'Fred',
-    lastName: 'Flintstone'
-  }
-});
+##### lazyhtml(jsonConfig)
+参数说明
+```json
+{
+    "method": "ajax", // 表示发起ajax请求
+    "target": "div > div.content", // ajax 结果写入的元素选择器，相对于当前容器
+    "response": {
+        "method": "get",  // ajax method
+        "type": "html",  // ajax response content type
+        "url": "https://www.yamibuy.com/robots.txt", // ajax url
+        "headers": [], // ajax headers
+        "body": "" // ajax post 时使用的body填充
+    }
+}
 ```
+##### lazyhtml(config)
+
+
 
 参数说明：
 ```js
