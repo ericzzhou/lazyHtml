@@ -1,15 +1,18 @@
 const path = require("path");
 
-let outputname = "lazyhtml.js";
-if (process.env.NODE_ENV === "production") {
-  outputname = "lazyhtml.min.js";
-}
-
-module.exports = {
-  entry: "./index.js",
-  output: {
-    filename: outputname,
-    path: path.join(__dirname, "/dist"),
-  },
-  plugins: [],
+module.exports = (env) => {
+  const isProduction = env.production === "true";
+  return {
+    entry: "./index.js",
+    output: {
+      filename: isProduction ? 'lazyhtml.min.js' : "lazyhtml.js",
+      path: path.join(__dirname, "/dist"),
+      //https://webpack.docschina.org/guides/author-libraries#expose-the-library
+      library:{
+        name:'LazyHtml',
+        type:'umd'
+      }
+    },
+    plugins: [],
+  };
 };
