@@ -1,6 +1,6 @@
 {
   "name": "eric-lazyhtml",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "A lazy loading library of html elements for web development",
   "main": "index.js",
   "scripts": {
