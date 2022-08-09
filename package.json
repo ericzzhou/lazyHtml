@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:dev":        "webpack --env production=false --mode development",
-    "build:production": "webpack --env production=true  --mode production"
+    "build:dev": "webpack --env production=false --mode development",
+    "build:production": "webpack --env production=true  --mode production",
+    "build": "concurrently \"webpack --env production=false --mode development\"  \"webpack --env production=true  --mode production\""
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
   },
   "homepage": "https://github.com/ericzzhou/lazyHtml#readme",
   "devDependencies": {
+    "concurrently": "^7.3.0",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0"
   }
